@@ -1,0 +1,8 @@
+body{margin:0 auto;width:550px;}
+input[type='radio']:required {
+box-shadow:none;}
+table{width:550px;border-collapse: collapse;margin:10px 0px;}
+table tr td,table tr th{padding:2px;border:1px solid #000000;}
+a{color:blue}
+button{text-align:center}
+.bld{font-weight:bolder;}

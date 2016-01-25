@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en-US">
+	<head>
+		<title>Expense Manager</title>
+		<link rel="stylesheet" href="style.css" type="text/css"/>
+	</head>
+	<body ng-app="expenseApp">
+		<div ng-controller="control as ctrl">
+			<table>
+				<tr>
+					<td><span class="bld">Total Income:</span></td><td><span ng-bind="ctrl.incomeTotal"></span></td>
+					<td><span class="bld">Expenditure:</span></td><td><span ng-bind="ctrl.expTotal"></span></td>
+					<td><span class="bld">Available Income:</span></td><td><span ng-bind="ctrl.incomeTotal-ctrl.expTotal"></span></td>
+				</tr>
+			</table>
+			<table>
+				<tr>
+					<td><button class="btn" ng-click="flag=1">Show Expenses</button></td><td><button class="btn" ng-click="flag=2">Show Incocme</button></td>
+				</tr>
+			</table>
+			<table ng-if="flag==2">
+				<tr><th><span class="bld">Income Category</span></th><th><span class="bld">Amount</span></th></tr>
+				<tr ng-repeat="income in ctrl.incomeCatArr">
+					<td ng-bind="income.Cat"></td>
+					<td ng-bind="income.Amount"></td>
+				</tr>
+				<tr>
+					<td>Total Income:</td><td ng-bind="ctrl.incomeTotal"></td>
+				</tr>
+			</table>
+			<table ng-if="flag==1">
+				<tr><th><span class="bld">Expense Category</span></th><th><span class="bld">Amount</span></th><th><span class="bld">Mode of Payment</span></th><th><span class="bld">Date</span></th></tr>
+				<tr ng-repeat="exp in ctrl.expenseArr">
+					<td ng-bind="exp.Cat"></td>
+					<td ng-bind="exp.Amount"></td>
+					<td ng-bind="exp.mop"></td>
+					<td ng-bind="exp.date | date:'MM/dd/yyyy'"></td>
+				</tr>
+				<tr><td>Total Expenditure:</td><td ng-bind="ctrl.expTotal"></td><td ><td></tr>
+			</table>
+			
+		</div>
+		<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+		<script src="angularApp.js"></script>
+	</body>
+<html>
