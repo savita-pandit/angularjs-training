@@ -55,7 +55,7 @@
 				<tr>
 					<td>Amount:</td>
 					<td>
-						<input type="number" ng-model="ctrl.amt" name="amt" ng-pattern="[0-9]" required /> 
+						<input type="number" min="0" ng-model="ctrl.amt" name="amt" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" required /> 
 						<span ng-show="addForm.amt.$dirty && addForm.amt.$error.required">*</span>
 						<span ng-show="addForm.amt.$dirty && addForm.amt.$invalid && (!addForm.amt.$error.required)">Invalid !!</span>
 					</td>
@@ -74,7 +74,7 @@
 					</td>
 					<td>Notes</td>
 					<td> 
-						<textarea ng-model="ctrl.notes" name="Notes" required></textarea> <span ng-show="addForm.Notes.$dirty && addForm.Notes.$error.required" class="error">*</span>
+						<textarea ng-maxlength="20" ng-model="ctrl.notes" name="Notes" required></textarea> <span ng-show="addForm.Notes.$dirty && addForm.Notes.$error.required" class="error">*</span>
 					</td>
 				</tr>
 				<tr><td><button type="Submit" Value="Add" ng-disabled="addForm.$invalid || ctrl.edit1==1">Add</button><button type="button" ng-click="ctrl.reset()">Reset</button></td><td><button type="button"  ng-click="ctrl.update(ctrl.tranId-1)" ng-if="ctrl.edit1===1" >Update</button></td></tr>
@@ -93,7 +93,7 @@
 					<td ng-bind="income.Amount"></td>
 					<td ng-bind="income.payer"></td>
 					<td ng-bind="income.payee"></td>
-					<td ng-bind="income.date | date:'dd/MM/yyyy'"></td>
+					<td ng-bind="income.date | date:'dd/MM/yyyy @ h:mma'"></td>
 					<td ng-bind="income.mop"></td>
 					<td ng-bind="income.Notes"></td>
 					<td><a class="btn" ng-click="ctrl.remove(income.transactionID-1)">Delete</a></td>
@@ -111,7 +111,7 @@
 					<td ng-bind="exp.Amount"></td>
 					<td ng-bind="exp.payer"></td>
 					<td ng-bind="exp.payee"></td>
-					<td ng-bind="exp.date | date:'dd/MM/yyyy'"></td>
+					<td ng-bind="exp.date |date:'dd/MM/yyyy @ h:mma'"></td>
 					<td ng-bind="exp.mop"></td>
 					<td ng-bind="exp.Notes"></td>
 					<td><a class="btn" ng-click="ctrl.remove(exp.transactionID-1)">Delete</a></td>
