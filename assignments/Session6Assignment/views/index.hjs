@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en-US" ng-app="expenseApp">
+	<head>
+		<title>Expense Manager</title>
+		<link rel="stylesheet" href="../public/stylesheets/style.css" type="text/css"/>
+		
+	</head>
+	<body>
+		<div ng-controller="control as ctrl">
+			<table>
+				<tr>
+					<td><span class="bld">Total Income:</span></td><td><span ng-bind="incomeTotal"></span></td>
+					<td><span class="bld">Expenditure:</span></td><td><span ng-bind="expTotal"></span></td>
+					<td><span class="bld">Available Income:</span></td><td><span ng-bind="incomeTotal-expTotal"></span></td>
+				</tr>
+			</table>
+			<form id="form1" name="addForm" novalidate ng-submit="evaluate()" ng-init="this.update=false">
+			<table>
+				<tr><td colspan="4"></tr>
+				<tr>
+					<td>Type Of Transaction:</td>
+					<td>
+						<input type="radio" name="type" ng-model="type" value="Income" required ng-disabled="this.update"> Income 
+						<input type="radio" name="type" ng-model="type" value="Expense" required ng-disabled="this.update"> Expense <span ng-show="addForm.mop.$error.required">*</span>
+					</td>
+				</tr>
+				<tr>
+					<td>Category</td>
+					<td>
+						<select name="category" ng-model="Cat" ng-options="c.Category as c.Category for c in SubCategory1 | unique:'Category'" required> 
+							<option value="">Select an option</option>
+						</select> <span ng-show="addForm.category.$dirty && addForm.category.$error.required">*</span>
+					</td>
+					<td>SubCategory</td>
+					<td>
+						<select name="subCate" ng-model="subCat" ng-options="c.subCategory as c.subCategory for c in SubCategory1 | filter:{Category:Cat}" ng-disabled="Cat==null" required>
+							<option value="">Select an option</option>
+						</select> <span ng-show="addForm.subCate.$dirty && addForm.subCate.$error.required">*</span>
+					</td>
+				</tr>
+				<tr>
+					<td>Payer:</td>
+					<td>
+						<input type="text" ng-pattern="/^[a-zA-Z]+$/" ng-model="payer" name="payerNm" required /> 
+						<span ng-show="addForm.payerNm.$dirty && addForm.payerNm.$error.required">*</span>
+						<span ng-show="addForm.payee.$dirty && addForm.payee.$invalid && (!addForm.payee.$error.required)">Invalid !!</span>
+					</td>
+					<td>Payee:</td>
+					<td>
+						<input type="text" ng-pattern="/^[a-zA-Z]+$/" ng-model="payee" name="payee" required/> 
+						<span ng-show="addForm.payee.$dirty && addForm.payee.$error.required">*</span>
+						<span ng-show="addForm.payee.$dirty && addForm.payee.$invalid && (!addForm.payee.$error.required)">Invalid !!</span>
+					</td>
+				</tr>
+				<tr>
+					<td>Amount:</td>
+					<td>
+						<input type="number" min="0" ng-model="amt" name="amt" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" required /> 
+						<span ng-show="addForm.amt.$dirty && addForm.amt.$error.required">*</span>
+						<span ng-show="addForm.amt.$dirty && addForm.amt.$invalid && (!addForm.amt.$error.required)">Invalid !!</span>
+					</td>
+					<td>Date:</td>
+					<td>
+						<input type="date" ng-model="date" name="date"  required/>  <span>yyyy-mm-dd 00:00:00</span>
+						<span ng-show="addForm.date.$dirty && addForm.date.$error.required">*</span>
+						<span ng-show="addForm.date.$dirty && addForm.date.$invalid && (!addForm.date.$error.required)">Invalid !!</span>
+					</td>
+				</tr>
+				<tr>
+					<td>Mode Of Payment:</td>
+					<td>
+						<select name="mop" ng-model="mop" ng-options="c.mop as c.mop for c in transaction | unique:'mop'" required>
+						</select> <span ng-show="addForm.mop.$dirty && addForm.mop.$error.required">*</span>
+					</td>
+					<td>Notes</td>
+					<td> 
+						<textarea ng-maxlength="20" ng-model="notes" name="Notes" required></textarea> <span ng-show="addForm.Notes.$dirty && addForm.Notes.$error.required" class="error">*</span>
+					</td>
+				</tr>
+				<tr><td><button type="Submit" Value="Add" ng-disabled="addForm.$invalid || edit1==1">Add</button><button type="button" ng-click="reset()">Reset</button></td><td><button type="button"  ng-click="updateTransaction(tranId)" ng-if="edit1===1" >Update</button></td></tr>
+			</table>
+			</form>
+			<table>
+				<tr>
+					<td><a class="btn" type="button" href="#Expense">Expenses</a></td>
+					<td><a class="btn"  type="button" href="#Income">Incocme</a></td>
+					<td><a class="btn" type="button" href="#Reports">Reports</a></td>
+				</tr>
+			</table>
+			<div ng-view></div>
+		</div>
+		<script src="../public/javascripts/angular.js"></script>
+		<script src="../public/javascripts/angular-route.js"></script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
+		
+		
+		<script src="../public/javascripts/angularApp.js"></script>
+		<script src="../public/javascripts/config.js"></script>
+		<script src="../public/javascripts/Services.js"></script>
+	</body>
+<html>

@@ -1,0 +1,18 @@
+<table>
+	<tr><th><span class="bld">Category</span></th><th><span class="bld">SubCategory</span></th><th><span class="bld">Amount</span></th><th><span class="bld">Payer</span></th><th><span class="bld">Payee</span></th><th><span class="bld">Date</span></th><th><span class="bld">Mode of Payment</span></th><th><span class="bld">Notes</span></th></tr>
+	<tr ng-repeat="income in transaction | filter:{type:'Income'}">
+		<td ng-bind="income.Category"></td>
+		<td ng-bind="income.subCategory"></td>
+		<td ng-bind="income.Amount"></td>
+		<td ng-bind="income.payer"></td>
+		<td ng-bind="income.payee"></td>
+		<td ng-bind="income.date | date:'dd/MM/yyyy @ h:mma'"></td>
+		<td ng-bind="income.mop"></td>
+		<td ng-bind="income.Notes"></td>
+		<td><a class="btn" ng-click="remove(income.transactionID)">Delete</a></td>
+		<td><a class="btn" ng-click="edit(income.transactionID)">Edit</a></td>
+	</tr>
+	<tr>
+		<td>Total Income:</td><td></td><td ng-bind="incomeTotal"></td><td></td>
+	</tr>
+</table>
