@@ -205,5 +205,10 @@ app.controller('controlIncome',['arrayFunc','$scope','$rootScope', function(arra
 	
 }]);
 app.controller('controlReports',['arrayFunc','$scope','$rootScope', function(arrayFunc,$scope,$rootScope){
-		
+	$scope.change=function(){
+		$scope.totalAmt=0;
+		for (var i=0;i<=$scope.ReportArray.length;i++){
+			$scope.totalAmt=$scope.totalAmt+$scope.ReportArray[i]["Amount"];
+		}
+	}
 }]);
