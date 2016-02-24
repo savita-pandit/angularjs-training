@@ -1,0 +1,5 @@
+<div class="recursive">
+	{{rec.type}} : {{rec.date | date:'dd/MM/yyyy @ h:mma'}} - {{rec.Amount}}
+	<button type="button" ng-click="addRecursive(rec.recursiveID)">Add</button>
+	<button type="button" ng-click="deleteRecursive(rec.recursiveID)">Delete</button>
+</div>
